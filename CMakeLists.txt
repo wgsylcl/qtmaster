@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
-project(qt5master LANGUAGES CXX)
+project(qtmaster LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 11)
 include_directories(./header)
 aux_source_directory(./src srcs)
-add_executable(qt5master ${srcs})
+add_executable(qtmaster ${srcs})

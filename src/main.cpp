@@ -2,6 +2,7 @@
 #include <direct.h>
 #include "fileremover.h"
 #include "projectcreater.h"
+#include "qtquickcreater.h"
 using namespace std;
 //example: qt5master <options> <classname>
 int main(int argc,char *argv[])
@@ -214,10 +215,19 @@ private:
  <connections/>
 </ui>)","QMainWindow",classname));
     }
-    if (option == "newproject")
+    if (option == "newwidgetproject")
     {
         projectcreater create;
         create(classname,workpath);
+    }
+    if (option == "newquickproject")
+    {
+        qtquickcreater create;
+        create(workpath,classname);
+    }
+    if (option == "addqml")
+    {
+        
     }
     return 0;
 }

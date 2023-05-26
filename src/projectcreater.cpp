@@ -2,7 +2,7 @@
 
 void projectcreater::create_dir(string path)
 {
-    CreateDirectory(path.c_str(),nullptr);
+    mkdir(path.c_str());
     return;
 }
 
@@ -11,26 +11,45 @@ void projectcreater::operator()(string projectname,string workpath)
     translator translate;
     create_dir(workpath+"/"+projectname);
     filewriter cmakewriter(workpath+"/"+projectname+"/CMakeLists.txt");
-    cmakewriter.write(translate(R"(cmake_minimum_required(VERSION 3.5) # CMake install : https://cmake.org/download/
-project(%2 LANGUAGES CXX)
+    cmakewriter.write(translate(R"(cmake_minimum_required(VERSION 3.5)
+
+project(%2 VERSION 0.1 LANGUAGES CXX)
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_PREFIX_PATH "$ENV{QTDIR}/mingw81_64") # Your Qt Kit Dir
+
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-find_package(Qt5 COMPONENTS Widgets REQUIRED) # Qt COMPONENTS
-aux_source_directory(./src srcs)
-# Specify MSVC UTF-8 encoding
-add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
-add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+set(CMAKE_PREFIX_PATH $ENV{QTDIR}/mingw_64)
 
-add_executable(${PROJECT_NAME}
-    WIN32 # If you need a terminal for debug, please comment this statement
-    ${srcs}
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+
+aux_source_directory(./src PROJECT_SOURCES)
+
+if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
+    qt_add_executable(%2
+        MANUAL_FINALIZATION
+        ${PROJECT_SOURCES}
+    )
+endif()
+
+target_link_libraries(%2 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+
+set_target_properties(%2 PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    MACOSX_BUNDLE TRUE
+    WIN32_EXECUTABLE TRUE
 )
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets) # Qt5 Shared Library)"
+
+if(QT_VERSION_MAJOR EQUAL 6)
+    qt_finalize_executable(%2)
+endif())"
 ,"qproject",projectname));
     create_dir(workpath+"/"+projectname+"/src");
     filewriter mainwriter(workpath+"/"+projectname+"/src/main.cpp");

@@ -1,7 +1,7 @@
 #pragma once
 #include <bits/stdc++.h>
 #include "filewriter.h"
-#include <windows.h>
+#include <direct.h>
 #include "translator.h"
 
 using namespace std;
