@@ -1,4 +1,4 @@
-# qt5master : 一个管理 vscode + qt 项目的命令行工具
+# qtmaster : 一个管理 vscode + qt 项目的命令行工具
 ## 由于作者学业紧张，目前只支持qt+mingw开发
 众所周知，我们可以使用vscode+cmake来开发Qt项目，但是，文件管理非常麻烦，此工具被开发出来的目的就是为了管理项目文件
 
