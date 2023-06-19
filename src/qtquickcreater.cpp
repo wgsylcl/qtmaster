@@ -56,7 +56,7 @@ set(CMAKE_CXX_STANDARD 17)\n\
 set(CMAKE_CXX_STANDARD_REQUIRED ON)\n\
 set(CMAKE_PREFIX_PATH $ENV{QTDIR}/mingw_64)\n\
 \n\
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick REQUIRED)\n\
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets Core Quick REQUIRED)\n\
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)\n\
 \n\
 aux_source_directory(./src PROJECT_SOURCES)\n\
@@ -65,6 +65,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)\n\
     qt_add_executable(%2\n\
         MANUAL_FINALIZATION\n\
         ${PROJECT_SOURCES}\n\
+        qml/qml.qrc\n\
     )\n\
 endif()\n\
 \n\
