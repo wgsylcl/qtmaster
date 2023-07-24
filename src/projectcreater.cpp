@@ -23,7 +23,7 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_PREFIX_PATH $ENV{QTDIR}/mingw_64)
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
@@ -35,6 +35,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
+else()
+    add_executable(%2 ${PROJECT_SOURCES})
 endif()
 
 target_link_libraries(%2 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
@@ -115,5 +117,5 @@ private:
  </widget>
  <resources/>
  <connections/>
-</ui>)","QMainWindow",projectname));
+</ui>)","QMainWindow","mainwindow"));
 }

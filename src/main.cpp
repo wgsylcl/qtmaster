@@ -25,7 +25,7 @@ int main(int argc,char *argv[])
         if(remover.test_exist(workpath+"/src/"+classname+".ui"))
         remover(workpath+"/src/"+classname+".ui");
     }
-    if (option == "addclass")
+    else if (option == "addclass")
     {
         filewriter cppwriter(workpath+"/src/"+classname+".cpp");
         translator tran;
@@ -53,7 +53,7 @@ public:
     ~%2();
 };)","QObject",classname));
     }
-    if (option == "addwidget")
+    else if (option == "addwidget")
     {
         filewriter cppwriter(workpath+"/src/"+classname+".cpp");
         translator tran;
@@ -106,7 +106,7 @@ private:
  <connections/>
 </ui>)","QWidget",classname));
     }
-    if (option == "adddialog")
+    else if (option == "adddialog")
     {
         filewriter cppwriter(workpath+"/src/"+classname+".cpp");
         translator tran;
@@ -159,7 +159,7 @@ private:
  <connections/>
 </ui>)","QDialog",classname));
     }
-    if (option == "addmainwindow")
+    else if (option == "addmainwindow")
     {
         filewriter cppwriter(workpath+"/src/"+classname+".cpp");
         translator tran;
@@ -215,19 +215,20 @@ private:
  <connections/>
 </ui>)","QMainWindow",classname));
     }
-    if (option == "newwidgetproject")
+    else if (option == "newwidgetproject")
     {
         projectcreater create;
         create(classname,workpath);
     }
-    if (option == "newquickproject")
+    else if (option == "newquickproject")
     {
         qtquickcreater create;
         create(workpath,classname);
     }
-    if (option == "addqml")
+    else
     {
-        
+        puts("qtmaster ERROR:option undefined!");
+        exit(-1);
     }
     return 0;
 }

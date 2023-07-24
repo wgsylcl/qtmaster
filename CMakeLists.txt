@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(qtmaster LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 11)
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 include_directories(./header)
 aux_source_directory(./src srcs)
 add_executable(qtmaster ${srcs})
