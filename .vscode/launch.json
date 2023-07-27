@@ -8,8 +8,11 @@
             "name": "(gdb) 启动",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/qt5master.exe",
-            "args": ["addclass","testclass"],
+            "program": "${workspaceFolder}/build/.exe",
+            "args": [
+                "addclass",
+                "testclass"
+            ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
@@ -29,6 +32,5 @@
                 }
             ]
         }
-
     ]
 }

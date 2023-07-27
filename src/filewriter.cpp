@@ -4,13 +4,13 @@ filewriter::filewriter(string path)
 {
     if(test_exist(path))
     {
-        puts("qt5master ERROR:File exists.");
+        puts("qtmaster ERROR:File exists.");
         exit(-1);
     }
     fout.open(path,ios::out);
     if(!fout.is_open())
     {
-        puts("qt5master ERROR:Can not create file!");
+        puts("qtmaster ERROR:Can not create file!");
         exit(-1);
     }
 }

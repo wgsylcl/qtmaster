@@ -23,7 +23,7 @@ int fileremover::operator()(string path)
 {
     if(!test_exist(path))
     {
-        puts("qt5master ERROR:The file is not exist!");
+        puts("qtmaster ERROR:The file is not exist!");
         exit(-1);
     }
     return remove(path.c_str());
